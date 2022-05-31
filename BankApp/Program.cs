@@ -108,7 +108,7 @@ namespace BankApp
             int accountNumber = int.Parse(Console.ReadLine() ?? "0");
             int indexOfAcc = accounts.FindIndex((obj) => obj.accountNumber == accountNumber);
 
-            if(indexOfAcc == -1)
+            if (indexOfAcc == -1)
             {
                 Console.Clear();
                 Console.WriteLine("Account number doesn't exist");
@@ -127,13 +127,65 @@ namespace BankApp
         static void CreditAmount()
         {
 
-            Console.WriteLine("Credit amount");
+            Console.Clear();
+            Console.WriteLine("***Credit amount***\nPlease enter the account number :");
+            int accountNumber = int.Parse(Console.ReadLine() ?? "0");
+            int indexOfAcc = accounts.FindIndex((obj) => obj.accountNumber == accountNumber);
+
+            if (indexOfAcc == -1)
+            {
+                Console.Clear();
+                Console.WriteLine("Account number doesn't exist");
+
+                ShowMenu();
+                return;
+            }
+
+            Console.WriteLine("Please enter the amount");
+
+            double creditAmount = double.Parse(Console.ReadLine() ?? "0.0");
+            accounts[indexOfAcc].balance += creditAmount;
+
+            Console.Clear();
+            Console.WriteLine(accounts[indexOfAcc].accountName + ", your account has credited '" + creditAmount + "'. Your current balance is '" + accounts[indexOfAcc].balance + "'");
+            ShowMenu();
         }
 
         static void DebitAmount()
         {
 
-            Console.WriteLine("Debit amount");
+            Console.Clear();
+            Console.WriteLine("***Debit amount***\nPlease enter the account number :");
+            int accountNumber = int.Parse(Console.ReadLine() ?? "0");
+            int indexOfAcc = accounts.FindIndex((obj) => obj.accountNumber == accountNumber);
+
+            if (indexOfAcc == -1)
+            {
+                Console.Clear();
+                Console.WriteLine("Account number doesn't exist");
+
+                ShowMenu();
+                return;
+            }
+
+            Console.WriteLine("Please enter the amount");
+
+            double debitAmount = double.Parse(Console.ReadLine() ?? "0.0");
+
+            if(debitAmount > accounts[indexOfAcc].balance)
+            {
+                Console.Clear();
+                Console.WriteLine("Your account doesn't have sufficient balance");
+
+                ShowMenu();
+                return;
+            }
+
+            accounts[indexOfAcc].balance -= debitAmount;
+
+            Console.Clear();
+            Console.WriteLine(accounts[indexOfAcc].accountName + ", your account has debited '" + debitAmount + "'. Your current balance is '" + accounts[indexOfAcc].balance + "'");
+            ShowMenu();
         }
     }
 }
