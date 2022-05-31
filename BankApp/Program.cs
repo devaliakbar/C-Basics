@@ -103,8 +103,25 @@ namespace BankApp
 
         static void DeleteAccount()
         {
+            Console.Clear();
+            Console.WriteLine("***Delete account***\nPlease enter your account number :");
+            int accountNumber = int.Parse(Console.ReadLine() ?? "0");
+            int indexOfAcc = accounts.FindIndex((obj) => obj.accountNumber == accountNumber);
 
-            Console.WriteLine("Delete account");
+            if(indexOfAcc == -1)
+            {
+                Console.Clear();
+                Console.WriteLine("Account number doesn't exist");
+
+                ShowMenu();
+                return;
+            }
+
+            accounts.RemoveAt(indexOfAcc);
+
+            Console.Clear();
+            Console.WriteLine("Account number '" + accountNumber + "' deleted successfully");
+            ShowMenu();
         }
 
         static void CreditAmount()
