@@ -63,7 +63,20 @@ namespace BankApp
         static void ListAccount()
         {
 
-            Console.WriteLine("List accounts");
+            Console.Clear();
+            Console.WriteLine("Accounts :\n");
+
+            foreach (var account in accounts)
+            {
+                Console.WriteLine("Account name : " + account.accountName
+                    + "\nAccount number : " + account.accountNumber
+                    + "\nDate of birth : " + account.birthday.ToString("dd/mm/yyyy")
+                    + "\nBalance : " + account.balance);
+
+                Console.WriteLine("\n");
+            }
+
+            ShowMenu();
         }
 
         static void CreateAccount()
